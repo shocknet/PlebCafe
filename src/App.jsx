@@ -66,7 +66,13 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        setMenuItems(data.menuItems || []);
+        // Fix image paths to use base URL
+        const baseUrl = import.meta.env.BASE_URL;
+        const fixedMenuItems = (data.menuItems || []).map(item => ({
+          ...item,
+          image: item.image?.startsWith('/') ? `${baseUrl}${item.image.slice(1)}` : item.image
+        }));
+        setMenuItems(fixedMenuItems);
         setOfferString(data.offer || '');
         setLoading(false);
       })
@@ -193,7 +199,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <div className="header-content">
-          <img src="/images/logo.png" alt="PlebCafe" className="logo" />
+          <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="PlebCafe" className="logo" />
         </div>
       </header>
 

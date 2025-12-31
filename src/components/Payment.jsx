@@ -271,7 +271,7 @@ function Payment({ totalUSD, totalSats, offerString, onBack, onComplete }) {
         <div className="powered-by">
           <span>Powered by</span>
           <a href="https://clinkme.dev" target="_blank" rel="noopener noreferrer">
-            <img src="/images/clink-logo.png" alt="CLINK" className="clink-logo" />
+            <img src={`${import.meta.env.BASE_URL}images/clink-logo.png`} alt="CLINK" className="clink-logo" />
             <span className="clink-text">CLINK</span>
           </a>
         </div>
