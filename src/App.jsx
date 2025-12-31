@@ -137,14 +137,47 @@ function App() {
     setCart([]);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cart.length === 0) return;
     const totalUSD = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const totalSats = btcPrice ? usdToSats(totalUSD, btcPrice) : 0;
-    if (totalSats > 0) {
-      localStorage.setItem('plebcafe_totalSats', totalSats.toString());
-      setSavedTotalSats(totalSats);
+    
+    // If BTC price is missing, try to fetch it before proceeding
+    if (!btcPrice) {
+      try {
+        const response = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=BTC');
+        const data = await response.json();
+        if (data.data && data.data.rates && data.data.rates.USD) {
+          const fetchedPrice = parseFloat(data.data.rates.USD);
+          setBtcPrice(fetchedPrice);
+          // Recalculate with new price
+          const totalSats = usdToSats(totalUSD, fetchedPrice);
+          if (totalSats > 0 && totalUSD > 0) {
+            localStorage.setItem('plebcafe_totalSats', totalSats.toString());
+            setSavedTotalSats(totalSats);
+            setView('payment');
+            setCartOpen(false);
+          }
+        } else {
+          // Price still unavailable, don't proceed
+          return;
+        }
+      } catch (err) {
+        console.error('Failed to fetch BTC price:', err);
+        // Price unavailable, don't proceed
+        return;
+      }
+      return;
     }
+    
+    const totalSats = usdToSats(totalUSD, btcPrice);
+    
+    // Don't proceed to payment if amount is 0
+    if (totalSats === 0 || totalUSD === 0) {
+      return;
+    }
+    
+    localStorage.setItem('plebcafe_totalSats', totalSats.toString());
+    setSavedTotalSats(totalSats);
     setView('payment');
     setCartOpen(false);
   };
