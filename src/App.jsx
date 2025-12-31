@@ -58,7 +58,9 @@ function App() {
 
   // Load menu configuration
   useEffect(() => {
-    fetch('/menu.json')
+    // Use import.meta.env.BASE_URL to get the base path (e.g., '/PlebCafe/')
+    const baseUrl = import.meta.env.BASE_URL;
+    fetch(`${baseUrl}menu.json`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load menu');
         return res.json();
