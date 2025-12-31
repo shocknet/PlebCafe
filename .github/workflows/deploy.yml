@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Preserve menu.json from previous deployment
+        id: preserve-menu
+        run: |
+          # Try to get menu.json from the current dist/ in repo (if it exists)
+          if [ -f "dist/menu.json" ]; then
+            mkdir -p .menu-backup
+            cp dist/menu.json .menu-backup/menu.json
+            echo "menu-exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "menu-exists=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Restore menu.json if preserved
+        if: steps.preserve-menu.outputs.menu-exists == 'true'
+        run: |
+          if [ -f ".menu-backup/menu.json" ]; then
+            cp .menu-backup/menu.json dist/menu.json
+            echo "Restored menu.json from previous deployment"
+          fi
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
