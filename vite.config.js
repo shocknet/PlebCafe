@@ -27,5 +27,6 @@ const preserveMenuPlugin = () => {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/PlebCafe/',
   plugins: [react(), preserveMenuPlugin()],
 })
