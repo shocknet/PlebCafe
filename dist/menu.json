@@ -1,0 +1,47 @@
+{
+  "menuItems": [
+    {
+      "id": "1",
+      "name": "Bottled Water",
+      "description": "Refreshing purified water",
+      "price": 2.50,
+      "image": "/images/bottled_water.jpeg"
+    },
+    {
+      "id": "2",
+      "name": "Candy Bars",
+      "description": "Assorted chocolate candy bars",
+      "price": 3.00,
+      "image": "/images/candy_bars.jpeg"
+    },
+    {
+      "id": "3",
+      "name": "Chips",
+      "description": "Crispy potato chips",
+      "price": 2.75,
+      "image": "/images/chips.webp"
+    },
+    {
+      "id": "4",
+      "name": "Protein Bar",
+      "description": "High-protein energy bar",
+      "price": 4.50,
+      "image": "/images/protein_bar.jpeg"
+    },
+    {
+      "id": "5",
+      "name": "Soda Cans",
+      "description": "Assorted soft drinks",
+      "price": 2.25,
+      "image": "/images/soda_cans.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "Waterloo Sparkling Water",
+      "description": "Refreshing sparkling water",
+      "price": 2.75,
+      "image": "/images/waterloo.jpg"
+    }
+  ],
+  "offer": "noffer1qvqsyqjqxf3kvcfkxscrqwfhxgcxve33vsuxvdenxu6rgv35xvcnjd34vyekxe3jxejrqdm9vsmnvdp5v43xvdt9xvmxxwt9v5ukvwtyv5ukxvspremhxue69uhhgetnwskhyetvv9ujumrfva58gmnfdenjuur4vgqzpccxc30wpf78wf2q78wg3vq008fd8ygtl4qy06gstpye3h5unc47gm5lwa"
+}

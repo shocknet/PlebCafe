@@ -1,0 +1,538 @@
+.payment-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #f5f5f5;
+  overflow-x: hidden;
+}
+
+.payment-content {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.payment-content h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  color: #2c2c2c;
+  text-align: center;
+}
+
+.payment-summary {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.summary-line:last-child {
+  margin-bottom: 0;
+}
+
+.summary-line span:first-child {
+  font-size: 1rem;
+  color: #666;
+}
+
+.summary-amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.summary-sats {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #E8B923;
+}
+
+.qr-section {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.qr-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.qr-instructions {
+  margin: 0 0 0.75rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.qr-code-wrapper {
+  display: inline-block;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.qr-code-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.qr-code-wrapper:active {
+  transform: scale(0.98);
+}
+
+.copy-invoice-btn {
+  margin: 0.75rem auto 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.copy-invoice-btn:hover {
+  background: #1a1a1a;
+  transform: scale(1.05);
+}
+
+.copy-invoice-btn.copied {
+  background: #28a745;
+}
+
+.copy-invoice-btn .copy-feedback {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c2c2c;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(5px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+.payment-loading {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.payment-loading .spinner {
+  font-size: 3rem;
+  color: #E8B923;
+  margin-bottom: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.payment-loading p {
+  color: #666;
+  font-size: 1.125rem;
+}
+
+.payment-status {
+  text-align: center;
+  margin-bottom: 1rem;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-pending,
+.status-paid,
+.status-failed {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #666;
+}
+
+.status-pending .spinner {
+  animation: spin 1s linear infinite;
+}
+
+.status-paid {
+  color: #28a745;
+}
+
+.status-failed {
+  color: #dc3545;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.payment-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.back-btn,
+.refresh-btn {
+  padding: 0.625rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.2s;
+}
+
+.back-btn {
+  background: #f5f5f5;
+  color: #2c2c2c;
+}
+
+.back-btn:hover {
+  background: #e8e8e8;
+}
+
+.refresh-btn {
+  background: #E8B923;
+  color: #2c2c2c;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.refresh-btn:hover {
+  background: #d4a81f;
+}
+
+.summary-timer {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #28a745;
+}
+
+.summary-timer.warning {
+  color: #dc3545;
+}
+
+.payment-expired {
+  text-align: center;
+  padding: 2rem;
+}
+
+.payment-expired .expired-icon {
+  font-size: 4rem;
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+.payment-expired h2 {
+  margin: 0 0 1rem 0;
+  color: #2c2c2c;
+}
+
+.payment-expired p {
+  margin: 0 0 2rem 0;
+  color: #666;
+}
+
+.powered-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.payment-success {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+  animation: scaleIn 0.5s ease-out;
+}
+
+.payment-success h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: 2rem;
+  color: #2c2c2c;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.success-message {
+  margin: 0 0 2rem 0;
+  color: #666;
+  font-size: 1.125rem;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.shop-again-btn {
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 0.2s;
+  background: #E8B923;
+  color: #2c2c2c;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.shop-again-btn:hover {
+  background: #d4a81f;
+  transform: scale(1.02);
+}
+
+.shop-again-btn:active {
+  transform: scale(0.98);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  opacity: 1;
+  animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.powered-by span {
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.powered-by a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  background: #1a1a2e;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.powered-by a:hover {
+  background: #252542;
+}
+
+.clink-logo {
+  height: 20px;
+  width: auto;
+}
+
+.clink-text {
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.payment-error {
+  text-align: center;
+  padding: 2rem;
+}
+
+.payment-error .error-icon {
+  font-size: 4rem;
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.payment-error h2 {
+  margin: 0 0 1rem 0;
+  color: #2c2c2c;
+}
+
+.payment-error p {
+  margin: 0 0 2rem 0;
+  color: #666;
+}
+
+/* Tablet and Desktop */
+@media (min-width: 768px) {
+  .payment-container {
+    min-height: calc(100vh - 100px);
+  }
+  
+  .payment-content {
+    padding: 2rem;
+  }
+  
+  .payment-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .payment-summary {
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-amount {
+    font-size: 1.5rem;
+  }
+  
+  .summary-sats {
+    font-size: 1.25rem;
+  }
+  
+  .qr-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .payment-status {
+    margin-bottom: 1.5rem;
+  }
+  
+  .payment-actions {
+    margin-bottom: 1.5rem;
+  }
+  
+  .powered-by {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .payment-content {
+    padding: 1rem;
+  }
+  
+  .payment-content h2 {
+    font-size: 1.125rem;
+  }
+  
+  .qr-code-wrapper {
+    padding: 0.5rem;
+  }
+  
+  .qr-code-wrapper svg {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .copy-invoice-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .payment-actions {
+    flex-direction: column;
+  }
+  
+  .back-btn,
+  .refresh-btn {
+    width: 100%;
+  }
+  
+  .success-icon {
+    font-size: 3rem;
+  }
+  
+  .payment-success h2 {
+    font-size: 1.75rem;
+  }
+}
+
