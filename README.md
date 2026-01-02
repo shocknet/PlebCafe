@@ -34,7 +34,7 @@ The built files will be in the `dist/` directory, ready to serve on your tablet 
 
 ## Configuration
 
-### Menu Configuration (`public/menu.json`)
+### Menu Configuration (`dist/menu.json`)
 
 The menu.json file contains:
 - `menuItems`: Array of menu items with:
