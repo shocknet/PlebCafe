@@ -18,7 +18,7 @@ A static React-based kiosk application for a snack cart, similar to McDonald's m
 npm install
 ```
 
-2. Configure menu: Edit `public/menu.json` to add your menu items and offer string.
+2. Configure menu: Edit `dist/menu.json` to add your menu items and offer string.
 
 3. Start development server:
 ```bash
